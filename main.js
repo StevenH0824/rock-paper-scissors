@@ -49,7 +49,7 @@ let info = function () {
 
 // Evaluate the game and returns a number corresponding to win, lose, or draw.
 // 1 = win , -1 = lost , 0 = draw
-evaluate = (userS=1,cpuS=1) => {
+evaluate = (userS,cpuS) => {
     if (userS === 'r'){
         // User Selects Rock
         if (cpuS === 's'){
@@ -72,7 +72,7 @@ evaluate = (userS=1,cpuS=1) => {
         else {
             return 0;
         }
-    } else if (userS === 's'){
+    } else {
         // User Selects Scissor
         if (cpuS === 'r'){
             return -1;
@@ -83,10 +83,13 @@ evaluate = (userS=1,cpuS=1) => {
         else {
             return 0;
         }
-    } else{
-        throw "An error has occured";
-    }
+    } 
 }
+
+
+// Regular Expression that checks first character of user input 
+let rg = /^[rps]$/;
+
 
 // Updates the variables and returns the result of the game through a string
 function track (result= 0) {
@@ -104,20 +107,32 @@ function track (result= 0) {
     }
 }
 
-
 function game (game_length = 3){
     for (i = 1; i <= game_length; i++){
         user = user_choice();
         cpu = cpu_generator();
 
-        console.log(track(evaluate(user,cpu)));
+        console.log(rg);
+        console.log(typeof(rg));
+
+        if (rg.test(user) === true){
+            console.log(track(evaluate(user,cpu)));
+            //console.log(cpu);
+        } else{
+            console.log("Terminated Program");
+            break;
+        }
     }
+    // Displays stats of user when the game is over.
+    // Can save a couple space by eliminating cpu_wins and cpu_loses.
     info();
 }
 
+// Use a prompt for user or make the games fixed and get rid of prompt.  
+//game();
 
-game();
+let string = 'hey';
+let number = 3;
 
-//user = user_choice();
-//console.log("CPU:" + cpu + " \nUser:" + user)
-//console.log(track(evaluate(user,cpu)));
+console.log(string *= 3)
+
