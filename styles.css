@@ -1,0 +1,98 @@
+/*
+These are the colors that I want when designing thise webpage
+F5EFE7  Light Beige
+D8C4B6  Beige
+4F709C  Blue
+213555  Navy
+*/
+
+:root {
+    --main-color1-white: #f5f5f5;
+    --main-color-beige: #D8C4B6;
+    --main-color-blue: #4F709C;
+    --main-color-navy: #213555;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0px;
+    padding: 0px;
+
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+}
+
+
+#header {
+    display: flex;
+    flex: none;
+    justify-content: center;
+    gap: 50px;
+    color: var(--main-color-beige);
+    background-color: var(--main-color-navy);
+    width: 100%;
+}
+
+.main-container{
+    background-color: var(--main-color-beige);
+    width: 100%;
+
+    display: flex;
+    flex: auto;
+    justify-content: space-around;
+}
+
+.buttons {
+    background-color: var(--main-color-blue);
+    display: flex;
+    flex: auto;
+    justify-content: space-around;
+    align-items: center;
+}
+
+button{
+    background-color: var(--main-color-beige);
+    color: var(--main-color-navy);
+    font-size: 30px;
+    width: 300px;
+    height: 200px;
+}
+
+
+.sub-container{
+    display: flex;
+    flex: auto;
+    background-color: var(--main-color-beige);
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    max-height: 406px; 
+    
+}
+
+
+.subcontainerText{
+    display: flex;
+    flex: auto;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px auto;
+    font-size: 20px;
+}
+
+#subtitle{
+    font-size: 30px;
+}
+
+
+#footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex: none;
+    color: var(--main-color-beige);
+    font-size: 14px;
+    background-color: var(--main-color-navy);
+    padding: 10px 0px 10px 0px;
+}

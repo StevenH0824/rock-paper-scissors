@@ -37,8 +37,6 @@ let user_choice = function () {
 let user_wins =
     user_loses =  
     draws = 0;
-let cpu_wins =
-    cpu_loses = 0;
 
 let info = function () {
     console.log("Totals");
@@ -95,44 +93,124 @@ let rg = /^[rps]$/;
 function track (result= 0) {
     if (result > 0){
         user_wins += 1;
-        cpu_loses -= 1;
-        return "User Wins!";
+        //return "User Wins!";
     } else if (result < 0){
         user_loses -= 1;
-        cpu_wins += 1;
-        return "User Loses";
+        //return "User Loses";
     } else {
         draws += 1;
-        return "Draw"
+        //return "Draw"
     }
 }
 
-function game (game_length = 3){
-    for (i = 1; i <= game_length; i++){
-        user = user_choice();
-        cpu = cpu_generator();
+function playRound(button){
+    let user_selection = button.outerText;
+    user_selection = user_selection.toLocaleLowerCase().charAt(0);
+    let cpu = cpu_generator();
+    track(evaluate(user_selection,cpu));
+    
+}
 
-        console.log(rg);
-        console.log(typeof(rg));
 
-        if (rg.test(user) === true){
-            console.log(track(evaluate(user,cpu)));
-            //console.log(cpu);
-        } else{
-            console.log("Terminated Program");
-            break;
+let btn = document.querySelectorAll('#btn');
+
+// Adding the totals into the sub container section of the web page
+let container = document.querySelector('.sub-container');
+
+let subHeading = document.createElement('p');
+subHeading.classList.add('subcontainerText');
+subHeading.setAttribute('id','subtitle');
+subHeading.innerText = "Stats";
+
+let subText = document.createElement('p');
+subText.classList.add('subcontainerText');
+//subText.innerText = "Wins:\t\t\t" + user_wins;
+//subText.innerText = "Wins:\t" + user_wins +"\n\nLoses:\t" + user_loses + "\n\nDraws:\t" + draws;
+
+let subText2 = document.createElement('p');
+subText2.classList.add('subcontainerText');
+//subText2.innerText = "Loses:\t\t\t" + user_loses;
+
+let subText3 = document.createElement('p');
+subText3.classList.add('subcontainerText');
+//subText3.innerText = "Draws:\t\t\t" + draws;
+
+
+let subText4 = document.createElement('p');
+subText4.classList.add('subcontainerText');
+
+
+
+subHeading.append(subText);
+subHeading.append(subText2);
+subHeading.append(subText3);
+container.append(subHeading);
+
+
+
+let write = function () {
+    subHeading.innerText = "Stats";
+    subText.innerText = "Wins:\t" + user_wins;
+    subText2.innerText = "Loses:\t" + Math.abs(user_loses);
+    subText3.innerText = "Draws:\t" + draws;
+    subHeading.append(subText);
+    subHeading.append(subText2);
+    subHeading.append(subText3);
+    container.append(subHeading);
+};
+
+
+cpu_generator = (number = 0) => {
+    number = Math.floor(Math.random()* 3) + 1 // Random number generated from 1 -> 3
+    if (number === 1){
+        return 'r';
+    }
+    else if (number === 2){
+        return 'p';
+    }
+    else{
+        return 's';
+    }
+}
+
+
+function declare_winner() {
+    let text = " is the Winner";
+    let cpuName = "CPU";
+    let userName = "User";
+
+    if ( (user_wins <= 5) || (user_loses >= -5) ){
+        console.log("USER_LOSES:  "+user_loses);
+        if (user_wins == 5){
+            subText4.innerText = userName + text;
+            subHeading.append(subText4);
+            user_wins = 0;
+            user_loses = 0;
+            draws = 0;
+        }
+        if (user_loses == -5){
+            subText4.innerText = cpuName + text;
+            subHeading.append(subText4);
+            user_wins = 0;
+            user_loses = 0;
+            draws = 0;
         }
     }
-    // Displays stats of user when the game is over.
-    // Can save a couple space by eliminating cpu_wins and cpu_loses.
-    info();
 }
 
-// Use a prompt for user or make the games fixed and get rid of prompt.  
-//game();
 
-let string = 'hey';
-let number = 3;
+console.log(container);
 
-console.log(string *= 3)
+
+btn.forEach((button) => {
+    button.addEventListener('click', e => {
+
+        // js program for the game logic
+        //console.log(button.outerText);
+        playRound(button);
+        //info();
+        write();
+        declare_winner();
+    });
+});
 
