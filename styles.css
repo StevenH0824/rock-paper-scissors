@@ -79,6 +79,7 @@ button{
     align-items: center;
     padding: 30px auto;
     font-size: 20px;
+    color: var(--main-color-navy);
 }
 
 #subtitle{
